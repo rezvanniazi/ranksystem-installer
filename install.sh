@@ -79,22 +79,22 @@ gen_random_string() {
 install_base() {
     case "${release}" in
     ubuntu | debian | armbian)
-        apt-get update && apt-get install -y -q wget curl tar mariadb-server certbot jq openssl
+        apt-get update && apt-get install -y -q wget curl tar mariadb-server-10.6 certbot jq openssl
         ;;
     centos | almalinux | rocky | ol)
-        yum -y update && yum install -y -q wget curl tar mariadb-server certbot jq openssl
+        yum -y update && yum install -y -q wget curl tar mariadb-server10.6 certbot jq openssl
         ;;
     fedora | amzn | virtuozzo)
-        dnf -y update && dnf install -y -q wget curl tar mariadb-server certbot jq openssl
+        dnf -y update && dnf install -y -q wget curl tar mariadb-server-10.6 certbot jq openssl
         ;;
     arch | manjaro | parch)
-        pacman -Syu && pacman -Syu --noconfirm wget curl tar mariadb-server certbot jq openssl
+        pacman -Syu && pacman -Syu --noconfirm wget curl tar mariadb-server-10.6 certbot jq openssl
         ;;
     opensuse-tumbleweed)
-        zypper refresh && zypper -q install -y wget curl tar mariadb-server certbot jq openssl
+        zypper refresh && zypper -q install -y wget curl tar mariadb-server-10.6 certbot jq openssl
         ;;
     *)
-        apt-get update && apt install -y -q wget curl tar mariadb-server certbot jq openssl
+        apt-get update && apt install -y -q wget curl tar mariadb-server-10.6 certbot jq openssl
         ;;
     esac
 }
