@@ -221,7 +221,6 @@ install_panel() {
 	if [[ ! -d rankSystemServers ]]; then
     	mkdir -p rankSystemServers
 		mkdir -p certs
-
 	fi
 
 
