@@ -82,7 +82,7 @@ install_base() {
         apt-get update && apt-get install -y -q wget curl tar mariadb-server-10.6 certbot jq openssl
         ;;
     centos | almalinux | rocky | ol)
-        yum -y update && yum install -y -q wget curl tar mariadb-server10.6 certbot jq openssl
+        yum -y update && yum install -y -q wget curl tar mariadb-server-10.6 certbot jq openssl
         ;;
     fedora | amzn | virtuozzo)
         dnf -y update && dnf install -y -q wget curl tar mariadb-server-10.6 certbot jq openssl
@@ -100,8 +100,7 @@ install_base() {
 }
 
 install_apache() {
-    sudo apt update
-	sudo apt install -y apache2 php libapache2-mod-php php-mysql mysql-server python3-certbot-apache
+	sudo apt install -y apache2 php libapache2-mod-php php-mysql python3-certbot-apache
 	sudo apt install -y acl php8.3-pdo php8.3-mysql php8.3-curl php8.3-zip php8.3-ssh2 php8.3-mbstring php8.3-xml
 	sudo a2enmod ssl
 
