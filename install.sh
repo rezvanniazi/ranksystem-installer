@@ -218,7 +218,7 @@ install_panel() {
 
 
 	cd ranksystem
-	if ([[ ! -d rankSystemServers]]); then
+	if [[ ! -d rankSystemServers ]]; then
     	mkdir -p rankSystemServers
 		mkdir -p certs
 
