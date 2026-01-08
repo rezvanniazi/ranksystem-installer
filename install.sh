@@ -101,22 +101,20 @@ install_base() {
 
 install_apache() {
     sudo apt update
-    sudo apt install apache2 php libapache2-mod-php php-mysql mysql-server
-    sudo apt install -y \
-        php8.1-pdo \
-        php8.1-mysql \
-        php8.1-curl \
-        php8.1-zip \
-        php8.1-ssh2 \
-        php8.1-mbstring \
-        php8.1-xml
+	sudo apt install -y apache2 php libapache2-mod-php php-mysql mysql-server python3-certbot-apache
+	sudo apt install -y acl php8.3-pdo php8.3-mysql php8.3-curl php8.3-zip php8.3-ssh2 php8.3-mbstring php8.3-xml
+	sudo a2enmod ssl
 
-    sudo chown -R www-data:www-data /home/ranksystem/rankSystemServers
-    sudo chmod -R 755 /home/ranksystem/rankSystemServers
+	sudo setfacl -R -d -m u:www-data:rwx /home/ranksystem/rankSystemServers
+	sudo setfacl -R -m u:www-data:rwx /home/ranksystem/rankSystemServers
 
-    sudo a2enmod rewrite
-    sudo systemctl restart apache2
+	sudo chown -R www-data:www-data /home/ranksystem/rankSystemServers
+	sudo chmod -R 755 /home/ranksystem/rankSystemServers
 
+
+
+	sudo a2enmod rewrite
+	sudo systemctl restart apache2
     wget -O /usr/local/bin/add-ssl-domain.sh https://raw.githubusercontent.com/rezvanniazi/ranksystem-installer/main/add-ssl-domain.sh
     chmod +x /usr/local/bin/add-ssl-domain.sh
 
@@ -139,7 +137,7 @@ install_panel() {
 			source .env
 			set +a
 			
-			backend_port="$PORT"
+			ranksystem_port="$PORT"
 			mysql_host="$MYSQL_HOST"
 			mysql_username="$MYSQL_USERNAME"
 			mysql_password="$MYSQL_PASSWORD"
@@ -169,7 +167,7 @@ install_panel() {
 	wait
 	mysql -e "CREATE USER '${mysql_username}'@'localhost' IDENTIFIED BY '${mysql_password}';" &
 	wait
-	mysql -e "GRANT ALL ON *.* TO '${mysql_username}'@'localhost';" &
+	mysql -e "GRANT ALL ON *.* TO '${mysql_username}'@'localhost' WITH GRANT OPTION;" &
 
 
 	read -p "Lotfan Token Github ra vared konid: " github_token
@@ -250,7 +248,7 @@ MYSQL_HOST="localhost"
 MYSQL_USERNAME="$mysql_username"
 MYSQL_PASSWORD="$mysql_password"
 MYSQL_DATABASE="$mysql_database"
-API_TOKEN=$api_token
+API_TOKEN="$api_token"
 JWT_SECRET=$jwt_secret
 
 
