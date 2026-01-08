@@ -153,7 +153,6 @@ install_panel() {
 		fi
     
 		cd ..
-		rm -rf ranksystem
 	else
 		read -p "lotfan user mysql ra vared konid: " mysql_username
 		read -p "lotfan password mysql ra vared konid: " mysql_password
@@ -212,7 +211,6 @@ install_panel() {
     fi
 	
 
-    mkdir -p ranksystem
 
 	tar -xvzf ranksystem.tar.gz -C ranksystem
 	wait
@@ -220,9 +218,13 @@ install_panel() {
 
 
 	cd ranksystem
+	if ([[ ! -d rankSystemServers]]); then
+    	mkdir -p rankSystemServers
+		mkdir -p certs
 
-	mkdir -p certs
-    mkdir -p rankSystemServers
+	fi
+
+
 	
 	if ([[ "${ipv4}" == "localhost" || "${ipv4}" == "127.0.0.1" ]]); then
 		node_env="development"
